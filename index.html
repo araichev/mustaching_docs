@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>mustaching 4.0.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=87138c5c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="mustaching-version-documentation">
+<h1>mustaching 4.0.4 Documentation<a class="headerlink" href="#mustaching-version-documentation" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-introduction"></span><section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>A tiny Python 3.9+ library inspired by Mr. Money Mustache to summarize and plot personal finance data given in a CSV file of transactions.
+Uses Pandas and Plotly to do most of the work.</p>
+<a class="reference internal image-reference" href="_images/plot.png"><img alt="chart" src="_images/plot.png" style="width: 500px;" />
+</a>
+<p>Smacks of <a class="reference external" href="http://plaintextaccounting.org/">plain text accounting</a> but is limited to single-entry transactions and focuses only on income and expenses.
+For full-featured double-entry bookkeeping in Python, use a different library, such as <a class="reference external" href="https://bitbucket.org/blais/beancount/overview">beancount</a>.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<p>Create a Python 3.9+ virtual environment and run <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">add</span> <span class="pre">mustaching</span></code>.</p>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
+<p>Play with the Jupyter notebook at <code class="docutils literal notranslate"><span class="pre">notebooks/examples.ipynb</span></code>.
+You can even do so online by clicking the Binder badge above.
+Using Binder you can also upload your own transaction data into the notebook, but consider first <a class="reference external" href="http://docs.mybinder.org/faq">Binder’s warning about private data</a>.</p>
+<p>Your CSV of transactions should contain at least the following columns</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'date'</span></code>: string; something consistent and recognizable by Pandas, e.g 2016-11-26</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'amount'</span></code>: float; amount of transaction; positive or negative, indicating an income or expense, respectively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'description'</span></code> (optional): string; description of transaction, e.g. ‘dandelion and burdock tea’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'category'</span></code> (optional): string; categorization of description, e.g. ‘healthcare’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'comment'</span></code> (optional): string; comment on transaction, e.g. ‘a gram of prevention is worth 16 grams of cure’</p></li>
+</ul>
+<p>The business logic can be found in <code class="docutils literal notranslate"><span class="pre">mustaching/main.py</span></code></p>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<p>At <a class="reference external" href="https://raichev.net/mustaching_docs">raichev.net/mustaching_docs</a>.</p>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Development status: Alpha</p></li>
+<li><p>This project uses semantic versioning</p></li>
+</ul>
+</section>
+<section id="authors">
+<h3>Authors<a class="headerlink" href="#authors" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Alex Raichev, 2016-11</p></li>
+</ul>
+</section>
+</section>
+<span id="document-api"></span><section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h2>
+<section id="module-mustaching.main">
+<span id="mustaching-main-module"></span><h3>mustaching.main module<a class="headerlink" href="#module-mustaching.main" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.create_transactions">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">create_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'12h'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expense_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#mustaching.main.create_transactions" title="Link to this definition">¶</a></dt>
+<dd><p>Create a DataFrame of sample transactions between the given dates
+(date strings that Pandas can interpret, such as YYYYMMDD) and at
+the given Pandas frequency.
+The columns will be all those readable by the function <a class="reference internal" href="#mustaching.main.read_transactions" title="mustaching.main.read_transactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_transactions()</span></code></a>.
+Each positive transaction will be assigned a income category from
+the given list <code class="docutils literal notranslate"><span class="pre">income_categories</span></code>, and each negative transaction
+will be assigned a expense category from the given list
+<code class="docutils literal notranslate"><span class="pre">expense_categories</span></code>.
+If these lists are not given, then whimsical default ones will be
+created.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.insert_repeating">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">insert_repeating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#mustaching.main.insert_repeating" title="Link to this definition">¶</a></dt>
+<dd><p>Given a DataFrame of transactions, add to it a repeating transaction
+at the given frequency for the given amount with the given optional
+description, category, and comment.
+Restrict the repeating transaction to the given start and end dates
+(date objects), inclusive.
+If no start date is given, then repeat from the first transaction date.
+If no end date is given, then repeat to the last transaction date.
+Drop duplicate rows and return the resulting DataFrame.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.interleave">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">interleave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#mustaching.main.interleave" title="Link to this definition">¶</a></dt>
+<dd><p>Given two lists a_0, a_1,…,b_n and b_0, b_1,…,b_n of length n,
+return the interleaved list a_0, b_0, a_1, b_1,…,a_n, b_n of length 2n.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.make_title">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">make_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mustaching.main.make_title" title="Link to this definition">¶</a></dt>
+<dd><p>Helper function for <a class="reference internal" href="#mustaching.main.plot" title="mustaching.main.plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot()</span></code></a>.
+Given a summary of the form output by the function <a class="reference internal" href="#mustaching.main.summarize" title="mustaching.main.summarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">summarize()</span></code></a>,
+return a string with the given header and currency and a summary basic
+summary of transactions, which acts as a title for plot.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.plot">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mustaching.main.plot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.read_transactions">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">read_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#mustaching.main.read_transactions" title="Link to this definition">¶</a></dt>
+<dd><p>Read a CSV file of transactions located at the given path (string
+or Path object), parse the date and category, and return the
+resulting DataFrame.</p>
+<p>The CSV should contain at least the following columns</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'date'</span></code>: string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'amount'</span></code>: float; amount of transaction; positive or negative,
+indicating a income or expense, respectively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'description'</span></code> (optional): string; description of transaction,
+e.g. ‘dandelion and burdock tea’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'category'</span></code> (optional): string; categorization of description,
+e.g. ‘healthcare’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'comment'</span></code> (optional): string; comment on transaction, e.g.
+‘a gram of prevention is worth 62.5 grams of cure’</p></li>
+</ul>
+<p>If the date format string <code class="docutils literal notranslate"><span class="pre">date_format</span></code> is given,  e.g
+<code class="docutils literal notranslate"><span class="pre">'%Y-%m-%d'</span></code>, then parse dates using that format; otherwise use
+let Pandas guess the date format.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.summarize">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">summarize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mustaching.main.summarize" title="Link to this definition">¶</a></dt>
+<dd><p>Given a DataFrame of transactions, slice it from the given start
+date to and including the given end date date (strings that Pandas
+can interpret, such as YYYYMMDD) if specified, drop unused categories,
+and return a dictionary with the keys ‘by_none’, ‘by_period’, ‘by_category’,
+‘by_category_and_period’ whose corresponding values are DataFrames with the
+following columns.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>key “by_none”</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;start_date&quot;</span></code>: first transaction date</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;end_date&quot;</span></code>: last transaction date</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income&quot;</span></code>: sum of positive transaction amounts for the date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense&quot;</span></code>: absolute value of sum of negative transaction amounts for the
+date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;balance&quot;</span></code>: income - expense</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;savings_pc&quot;</span></code>: 100 * balance / income</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>key “by_period”</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;date&quot;</span></code>: date of period after date range has been resampled at
+frequency <code class="docutils literal notranslate"><span class="pre">freq</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income&quot;</span></code>: sum of positive transaction amounts for the period</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense&quot;</span></code>: absolute value of sum of negative transactions for the period</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;balance&quot;</span></code>: income - expense for the period</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;savings_pc</span></code>: 100 * balance / income</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;cumulative_income&quot;</span></code>: income plus the incomes of all previous periods</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;cumulative_balance&quot;</span></code>: balance plus the balances of all previous periods</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;cumulative_savings_pc&quot;</span></code>: 100 * cumulative_balance / cumulative_income</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>key “by_category”</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;category&quot;</span></code>: category of transactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income&quot;</span></code>: sum of positive transaction amounts for the category and
+date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense&quot;</span></code>: absolute value of sum of negative transaction amounts for the
+category and date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;balance&quot;</span></code>: income - expense</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income_to_total_income_pc&quot;</span></code>: 100 * income / (total income for date range)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense_to_total_income_pc&quot;</span></code>:
+100 * expense / (total income for date range)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense_to_total_expense_pc&quot;</span></code>:
+100 * expense / (total expense for date range)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;daily_avg_balance&quot;</span></code>: sum of all amounts for category divided by the number
+of days in the date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;weekly_avg_balance&quot;</span></code>: sum of all amounts for category divided by the
+number of weeks in the date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;monthly_avg_balance&quot;</span></code>: sum of all amounts for category divided by the
+number of months in the date range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;yearly_avg_balance&quot;</span></code>: sum of all amounts for category divided by the
+number of years in the date range</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>key “by_category_and_period”</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;date&quot;</span></code>: date of period after date range has been resampled at
+frequency <code class="docutils literal notranslate"><span class="pre">freq</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;category&quot;</span></code>: category of transactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income&quot;</span></code>: sum of positive transaction amounts for the period and category</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense&quot;</span></code>: absolute value of sum of negative transactions for the period
+and category</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;balance&quot;</span></code>: income - expense for the period and category</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;income_to_period_income_pc&quot;</span></code>: 100 * income / (total income for period)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense_to_period_income_pc&quot;</span></code>: 100 * expense / (total income for period)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;expense_to_period_expense_pc&quot;</span></code>: 100 * expense / (total expense for period)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Round all values to the given number of decimals, or set <code class="docutils literal notranslate"><span class="pre">decimals=None</span></code>
+to avoid rounding.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mustaching.main.validate_transactions">
+<span class="sig-prename descclassname"><span class="pre">mustaching.main.</span></span><span class="sig-name descname"><span class="pre">validate_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#mustaching.main.validate_transactions" title="Link to this definition">¶</a></dt>
+<dd><p>Raise a Pandera SchemaError if the given DataFrame of transactions does not
+agree with the schema :const:SCHEMA.
+Otherwise, return the DataFrame as is.</p>
+</dd></dl>
+
+</section>
+</section>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">mustaching</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="#document-introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#document-api">API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2015, Alex Raichev.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
